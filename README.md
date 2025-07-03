@@ -1,4 +1,4 @@
-# idlenvim: The Ultimate Neovim + Tmux IDE Setup
+# IDLE-Nvim: The Ultimate Neovim + Tmux IDE Setup
 
 > **Turn your terminal into a beautiful, fast, AI-powered IDE on any Linux!**
 
