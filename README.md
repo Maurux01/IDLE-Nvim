@@ -101,6 +101,43 @@ If you want to install manually or customize before setup:
 - Install plugins: `Ctrl-a I`
 - Powerline status bar, mouse support, and more.
 
+## ⌨️ Keybinds Quick Reference
+
+| Keybind         | Mode      | Description                                 |
+|-----------------|-----------|---------------------------------------------|
+| `<leader>`      | Normal    | Space bar (leader key for all mappings)     |
+| `<leader>cs`    | Normal    | Switch color scheme                         |
+| `<leader>cc`    | Normal    | Toggle Copilot (AI autocomplete)            |
+| `<leader>ai`    | Visual    | Edit/refactor code with ChatGPT.nvim        |
+| `<leader>ff`    | Normal    | Find files (Telescope)                      |
+| `<leader>fg`    | Normal    | Live grep (Telescope)                       |
+| `<leader>fb`    | Normal    | List open buffers (Telescope)               |
+| `<leader>fo`    | Normal    | Recent files (Telescope)                    |
+| `<leader>/'`    | Normal    | Fuzzy search in current buffer              |
+| `<leader>e`     | Normal    | Toggle file explorer (nvim-tree/neo-tree)   |
+| `<leader>tt`    | Normal    | Toggle Trouble (diagnostics)                |
+| `<leader>h`     | Normal    | Harpoon quick menu                         |
+| `<leader>m`     | Normal    | Toggle minimap (if enabled)                 |
+| `<leader>/'`    | Normal    | Fuzzy search in buffer                      |
+| `<leader>c`     | Normal    | Comment line/selection                      |
+| `<leader>u`     | Normal    | Toggle undo tree (if enabled)               |
+| `<Tab>`/`<S-Tab>` | Insert  | Next/prev completion (nvim-cmp)             |
+| `<C-Space>`     | Insert    | Trigger completion menu                     |
+| `gd`            | Normal    | Go to definition (LSP)                      |
+| `gr`            | Normal    | Go to references (LSP)                      |
+| `K`             | Normal    | Hover docs (LSP)                            |
+| `[d`/`]d`       | Normal    | Prev/next diagnostic (LSP)                  |
+| `\`             | Normal    | which-key popup (shows all mappings)        |
+| `Ctrl-a`        | tmux      | tmux prefix (instead of Ctrl-b)             |
+| `Ctrl-a r`      | tmux      | Reload tmux config                          |
+| `Ctrl-a I`      | tmux      | Install tmux plugins                        |
+| `Ctrl-a c`      | tmux      | New tmux window                             |
+| `Ctrl-a n/p`    | tmux      | Next/prev tmux window                       |
+| `Ctrl-a [`      | tmux      | Enter copy mode                             |
+| `Ctrl-a d`      | tmux      | Detach session                              |
+
+> For more, press `<leader>` in normal mode to see all available keybinds (which-key).
+
 ---
 
 ## ⚙️ Customization
