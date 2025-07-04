@@ -147,11 +147,12 @@ vim.g.rainbow_delimiters = {
 
 -- 7. LSP & Mason
 require('mason').setup{}
-require('mason-lspconfig').setup{
+require('mason-lspconfig').setup({
   ensure_installed = {
     'bashls', 'clangd', 'cssls', 'dockerls', 'gopls', 'html', 'jdtls', 'tsserver', 'jsonls', 'lua_ls', 'marksman', 'phpactor', 'pyright', 'ruby_ls', 'rust_analyzer', 'sqlls', 'taplo', 'vimls', 'yamlls', 'kotlin_language_server', 'dartls', 'swift_mesonls', 'texlab', 'lemminx', 'volar', 'svelte',
   },
-}
+  automatic_installation = true,
+})
 local lspconfig = require('lspconfig')
 local servers = {
   'bashls', 'clangd', 'cssls', 'dockerls', 'gopls', 'html', 'jdtls', 'tsserver', 'jsonls', 'lua_ls', 'marksman', 'phpactor', 'pyright', 'ruby_ls', 'rust_analyzer', 'sqlls', 'taplo', 'vimls', 'yamlls', 'kotlin_language_server', 'dartls', 'swift_mesonls', 'texlab', 'lemminx', 'volar', 'svelte',
