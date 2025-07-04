@@ -1,3 +1,5 @@
+vim.g.mapleader = ' '
+
 -- PACKER: Plugin manager
 vim.cmd [[packadd packer.nvim]]
 
