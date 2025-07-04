@@ -42,8 +42,8 @@ map('n', '<leader>e', ':NvimTreeToggle<CR>', opts)
 map('n', '<leader>fe', ':NvimTreeFocus<CR>', opts)
 
 -- COMMENT.NVIM
-map('n', 'gcc', '<Plug>(comment_toggle_linewise_current)', {})
-map('x', 'gc', '<Plug>(comment_toggle_linewise_visual)', {})
+map('n', 'gcc', "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
+map('x', 'gc', "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
 
 -- TERMINAL
 map('n', '<C-\\>', ':ToggleTerm<CR>', opts)
