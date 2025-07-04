@@ -37,6 +37,7 @@ require('packer').startup(function(use)
   use { 'shaunsingh/nord.nvim' }
   use { 'navarasu/onedark.nvim' }
   use { 'EdenEast/nightfox.nvim' }
+  use { 'Exafunction/codeium.nvim', requires = { 'nvim-lua/plenary.nvim', 'hrsh7th/nvim-cmp' } }
 end)
 
 -- TREESITTER: Advanced syntax highlight
