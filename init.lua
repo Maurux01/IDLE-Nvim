@@ -1,3 +1,4 @@
+vim.g.mapleader = ' '
 -- init.lua
 -- Configuración principal de Neovim estilo IDE para frontend y backend
 
