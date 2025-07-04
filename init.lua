@@ -82,6 +82,25 @@ require('lazy').setup({
   { 'Exafunction/codeium.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'hrsh7th/nvim-cmp' } },
   -- Rainbow brackets
   { 'HiPhish/rainbow-delimiters.nvim' },
+  -- Más color schemes modernos
+  'oxfist/night-owl.nvim',
+  'projekt0n/github-nvim-theme',
+  'sainnhe/sonokai',
+  'sainnhe/edge',
+  'nyoom-engineering/oxocarbon.nvim',
+  'Yazeed1s/oh-lucy.nvim',
+  'ramojus/mellifluous.nvim',
+  'tiagovla/tokyodark.nvim',
+  'olimorris/onedarkpro.nvim',
+  'maxmx03/fluoromachine.nvim',
+  -- UI/UX
+  'akinsho/bufferline.nvim',
+  'goolord/alpha-nvim',
+  -- Animaciones y extras visuales
+  'gen740/SmoothCursor.nvim',
+  'xiyaowong/nvim-transparent',
+  'RRethy/vim-illuminate',
+  'folke/zen-mode.nvim',
 })
 
 -- 4. Basic options for modern look
@@ -179,15 +198,15 @@ require('notify').setup{}
 require('dressing').setup{}
 require('scrollbar').setup{}
 require('mini.animate').setup({
-  timing = require('mini.animate').gen_timing.linear({ duration = 200 }),
-  cursor = { enable = true, timing = require('mini.animate').gen_timing.linear({ duration = 150 }) },
-  scroll = { enable = true, timing = require('mini.animate').gen_timing.linear({ duration = 200 }) },
-  resize = { enable = true, timing = require('mini.animate').gen_timing.linear({ duration = 120 }) },
-  open = { enable = true, timing = require('mini.animate').gen_timing.linear({ duration = 100 }) },
-  close = { enable = true, timing = require('mini.animate').gen_timing.linear({ duration = 80 }) },
+  timing = require('mini.animate').gen_timing.sine({ duration = 300 }),
+  cursor = { enable = true, timing = require('mini.animate').gen_timing.sine({ duration = 200 }) },
+  scroll = { enable = true, timing = require('mini.animate').gen_timing.sine({ duration = 300 }) },
+  resize = { enable = true, timing = require('mini.animate').gen_timing.sine({ duration = 180 }) },
+  open = { enable = true, timing = require('mini.animate').gen_timing.sine({ duration = 120 }) },
+  close = { enable = true, timing = require('mini.animate').gen_timing.sine({ duration = 100 }) },
 })
 require('neoscroll').setup({
-  easing_function = 'circular',
+  easing_function = 'sine',
   hide_cursor = true,
   stop_eof = true,
   respect_scrolloff = true,
@@ -261,6 +280,7 @@ map('n', '<A-Down>', '<C-w>j', opts)
 -- 11. Colorscheme rotator
 local colorschemes = {
   'vscode', 'catppuccin', 'tokyonight', 'gruvbox', 'dracula', 'nord', 'onedark', 'nightfox', 'everforest', 'kanagawa', 'rose-pine',
+  'night-owl', 'github_dark', 'sonokai', 'edge', 'oxocarbon', 'oh-lucy', 'mellifluous', 'tokyodark', 'onedarkpro', 'fluoromachine',
 }
 local cs_index = 1
 function _G.CycleColorscheme()
@@ -295,4 +315,12 @@ vim.api.nvim_create_autocmd("VimEnter", {
     vim.api.nvim_buf_set_lines(0, 0, -1, false, ascii)
     vim.api.nvim_command('normal! G')
   end
-}) 
+})
+
+-- Configuración de plugins UI/UX y animaciones extra
+require('bufferline').setup{}
+require('alpha').setup(require'alpha.themes.startify'.config)
+require('SmoothCursor').setup{}
+require('transparent').setup({ enable = true })
+require('illuminate').configure({ delay = 200 })
+require('zen-mode').setup{} 
