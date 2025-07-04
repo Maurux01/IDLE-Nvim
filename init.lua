@@ -80,6 +80,8 @@ require('lazy').setup({
   { 'iamcco/markdown-preview.nvim', build = 'cd app && npm install', ft = 'markdown' },
   -- AI
   { 'Exafunction/codeium.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'hrsh7th/nvim-cmp' } },
+  -- Rainbow brackets
+  { 'HiPhish/rainbow-delimiters.nvim' },
 })
 
 -- 4. Basic options for modern look
@@ -96,7 +98,7 @@ vim.o.scrolloff = 8
 vim.o.sidescrolloff = 8
 
 -- 5. Colorscheme (default: vscode)
-vim.cmd [[colorscheme vscode]]
+vim.cmd [[colorscheme catppuccin]]
 
 -- 6. Treesitter
 require('nvim-treesitter.configs').setup {
@@ -105,6 +107,23 @@ require('nvim-treesitter.configs').setup {
   },
   highlight = { enable = true },
   indent = { enable = true },
+}
+
+-- Rainbow brackets config
+local rainbow_delimiters = require 'rainbow-delimiters'
+vim.g.rainbow_delimiters = {
+  strategy = {
+    [''] = rainbow_delimiters.strategy['global'],
+    vim = rainbow_delimiters.strategy['local'],
+  },
+  query = {
+    [''] = 'rainbow-delimiters',
+    lua = 'rainbow-blocks',
+  },
+  highlight = {
+    'RainbowDelimiterRed', 'RainbowDelimiterYellow', 'RainbowDelimiterBlue',
+    'RainbowDelimiterOrange', 'RainbowDelimiterGreen', 'RainbowDelimiterViolet', 'RainbowDelimiterCyan',
+  },
 }
 
 -- 7. LSP & Mason
@@ -159,8 +178,24 @@ require('noice').setup{}
 require('notify').setup{}
 require('dressing').setup{}
 require('scrollbar').setup{}
-require('mini.animate').setup{}
-require('neoscroll').setup{}
+require('mini.animate').setup({
+  timing = require('mini.animate').gen_timing.linear({ duration = 200 }),
+  cursor = { enable = true, timing = require('mini.animate').gen_timing.linear({ duration = 150 }) },
+  scroll = { enable = true, timing = require('mini.animate').gen_timing.linear({ duration = 200 }) },
+  resize = { enable = true, timing = require('mini.animate').gen_timing.linear({ duration = 120 }) },
+  open = { enable = true, timing = require('mini.animate').gen_timing.linear({ duration = 100 }) },
+  close = { enable = true, timing = require('mini.animate').gen_timing.linear({ duration = 80 }) },
+})
+require('neoscroll').setup({
+  easing_function = 'circular',
+  hide_cursor = true,
+  stop_eof = true,
+  respect_scrolloff = true,
+  cursor_scrolls_alone = true,
+  performance_mode = false,
+  pre_hook = nil,
+  post_hook = nil,
+})
 
 -- 10. Keybinds (Vim style, leader is /)
 local map = vim.api.nvim_set_keymap
@@ -192,8 +227,14 @@ local colorschemes = {
 local cs_index = 1
 function _G.CycleColorscheme()
   cs_index = cs_index % #colorschemes + 1
-  vim.cmd('colorscheme ' .. colorschemes[cs_index])
-  print('Colorscheme: ' .. colorschemes[cs_index])
+  local cs = colorschemes[cs_index]
+  vim.cmd('colorscheme ' .. cs)
+  local ok, notify = pcall(require, 'notify')
+  if ok then
+    notify('🌈 Colorscheme: ' .. cs, 'info', { title = 'Colorscheme Rotator', timeout = 2000 })
+  else
+    print('Colorscheme: ' .. cs)
+  end
 end
 
 -- 12. Markdown preview config
