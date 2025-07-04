@@ -1,5 +1,5 @@
 -- Configuración de Mason y LSP para frontend y backend
-require('mason').setup{}
+
 require('mason-lspconfig').setup({
   ensure_installed = {
     'tsserver', 'html', 'cssls', 'jsonls', 'vuels', 'svelte',
