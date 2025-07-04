@@ -189,10 +189,10 @@ vim.o.signcolumn = 'no'
 -- LSP & AUTOCOMPLETION
 require('mason').setup{}
 require('mason-lspconfig').setup{
-  ensure_installed = { 'html', 'cssls', 'ts_ls', 'pyright', 'lua_ls' },
+  ensure_installed = { 'html', 'cssls', 'tsserver', 'pyright', 'lua_ls' },
 }
 local lspconfig = require('lspconfig')
-local servers = { 'html', 'cssls', 'ts_ls', 'pyright', 'lua_ls' }
+local servers = { 'html', 'cssls', 'tsserver', 'pyright', 'lua_ls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {}
 end
