@@ -3,8 +3,8 @@
 -- =============================
 -- Modern IDE-like config with lazy.nvim, LSP, autocompletion, VSCode-like UI, animations, and all major languages
 
--- 1. Set <leader> to '/'
-vim.g.mapleader = "/"
+-- 1. Set <leader> to ' ' (space, estilo NvChad)
+vim.g.mapleader = " "
 
 -- 2. Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -197,28 +197,44 @@ require('neoscroll').setup({
   post_hook = nil,
 })
 
--- 10. Keybinds (Vim style, leader is /)
+-- 10. Keybinds (estilo NvChad, líder es <Space>)
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
-map('n', '<leader>ff', ':Telescope find_files<CR>', opts) -- /ff: Find files
-map('n', '<leader>fg', ':Telescope live_grep<CR>', opts)  -- /fg: Grep
-map('n', '<leader>e', ':NvimTreeToggle<CR>', opts)        -- /e: File explorer
-map('n', '<leader>t', ':ToggleTerm<CR>', opts)            -- /t: Terminal
-map('n', '<leader>/', ':lua require("Comment.api").toggle.linewise.current()<CR>', opts) -- //: Comment
-map('n', '<leader>b', ':Telescope buffers<CR>', opts)     -- /b: Buffers
-map('n', '<leader>gs', ':Gitsigns stage_hunk<CR>', opts)  -- /gs: Git stage
-map('n', '<leader>gu', ':Gitsigns undo_stage_hunk<CR>', opts) -- /gu: Git undo stage
-map('n', '<leader>gd', ':Gitsigns diffthis<CR>', opts)    -- /gd: Git diff
-map('n', '<leader>u', ':UndotreeToggle<CR>', opts)        -- /u: Undo tree
-map('n', '<leader>h', ':nohlsearch<CR>', opts)            -- /h: Clear search
-map('n', '<leader>q', ':q<CR>', opts)                     -- /q: Quit
-map('n', '<leader>w', ':w<CR>', opts)                     -- /w: Save
-map('n', '<leader>n', ':enew<CR>', opts)                  -- /n: New file
-map('n', '<leader>[', ':bprevious<CR>', opts)             -- /[: Prev buffer
-map('n', '<leader>]', ':bnext<CR>', opts)                 -- /]: Next buffer
-map('n', '<leader>s', ':lua require("nvim-surround").normal_surround()<CR>', opts) -- /s: Surround
-map('n', '<leader>?', ':WhichKey<CR>', opts)              -- /?: Which-key
-map('n', '<leader>cs', ':lua CycleColorscheme()<CR>', opts) -- /cs: Cycle colorscheme
+-- === Archivos y búsqueda ===
+map('n', '<leader>ff', ':Telescope find_files<CR>', opts) -- Buscar archivos
+map('n', '<leader>fg', ':Telescope live_grep<CR>', opts) -- Buscar texto en proyecto
+map('n', '<leader>fb', ':Telescope buffers<CR>', opts)   -- Buscar buffers abiertos
+map('n', '<leader>fo', ':Telescope oldfiles<CR>', opts)  -- Archivos recientes
+-- === Explorador y terminal ===
+map('n', '<leader>e', ':NvimTreeToggle<CR>', opts)       -- Explorador de archivos
+map('n', '<leader>tt', ':ToggleTerm<CR>', opts)          -- Terminal flotante
+-- === Comentarios y surround ===
+map('n', '<leader>/', ':lua require("Comment.api").toggle.linewise.current()<CR>', opts) -- Comentar línea actual
+map('n', '<leader>s', ':lua require("nvim-surround").normal_surround()<CR>', opts) -- Surround (añadir/editar delimitadores)
+-- === Guardar, cerrar, nuevo buffer ===
+map('n', '<leader>w', ':w<CR>', opts)                    -- Guardar archivo
+map('n', '<leader>q', ':q<CR>', opts)                    -- Cerrar ventana
+map('n', '<leader>n', ':enew<CR>', opts)                 -- Nuevo buffer vacío
+-- === Navegación de buffers ===
+map('n', '<S-l>', ':bnext<CR>', opts)                    -- Siguiente buffer
+map('n', '<S-h>', ':bprevious<CR>', opts)                -- Buffer anterior
+-- === Git ===
+map('n', '<leader>gg', ':LazyGit<CR>', opts)             -- LazyGit (si está instalado)
+map('n', '<leader>gs', ':Gitsigns stage_hunk<CR>', opts)  -- Git: stage hunk
+map('n', '<leader>gu', ':Gitsigns undo_stage_hunk<CR>', opts) -- Git: undo stage hunk
+map('n', '<leader>gd', ':Gitsigns diffthis<CR>', opts)    -- Git: diff actual
+-- === Ventanas y splits ===
+map('n', '<leader>sv', ':vsplit<CR>', opts)               -- Split vertical
+map('n', '<leader>sh', ':split<CR>', opts)                -- Split horizontal
+map('n', '<C-h>', '<C-w>h', opts)                         -- Mover a ventana izquierda
+map('n', '<C-j>', '<C-w>j', opts)                         -- Mover a ventana abajo
+map('n', '<C-k>', '<C-w>k', opts)                         -- Mover a ventana arriba
+map('n', '<C-l>', '<C-w>l', opts)                         -- Mover a ventana derecha
+-- === Utilidades ===
+map('n', '<leader>u', ':UndotreeToggle<CR>', opts)        -- Árbol de deshacer
+map('n', '<leader>h', ':nohlsearch<CR>', opts)            -- Limpiar resaltado de búsqueda
+map('n', '<leader>?', ':WhichKey<CR>', opts)              -- Mostrar menú de atajos (<leader> + ?)
+map('n', '<leader>cs', ':lua CycleColorscheme()<CR>', opts) -- Cambiar esquema de color
 
 -- 11. Colorscheme rotator
 local colorschemes = {
