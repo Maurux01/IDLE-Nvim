@@ -1,6 +1,12 @@
-vim.g.mapleader = ' '
+-- =============================
+--      NEOVIM IDE SETUP
+-- =============================
+-- Modern IDE-like config with lazy.nvim, LSP, autocompletion, VSCode-like UI, animations, and all major languages
 
--- LAZY.NVIM: Plugin manager moderno y rápido
+-- 1. Set <leader> to Shift ("S")
+vim.g.mapleader = "S"
+
+-- 2. Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -14,32 +20,22 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- 3. Plugin setup (all-in-one)
 require('lazy').setup({
-  -- Syntax & UI
+  -- UI & Experience
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
-  'lukas-reineke/indent-blankline.nvim',
-  'nvim-lualine/lualine.nvim',
   'nvim-tree/nvim-tree.lua',
   'nvim-tree/nvim-web-devicons',
-  { 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim' } },
-  { 'akinsho/toggleterm.nvim', version = '*' },
-  'HiPhish/rainbow-delimiters.nvim',
-  -- LSP & Autocompletion
-  'neovim/nvim-lspconfig',
-  'williamboman/mason.nvim',
-  'williamboman/mason-lspconfig.nvim',
-  'hrsh7th/nvim-cmp',
-  'hrsh7th/cmp-nvim-lsp',
-  'L3MON4D3/LuaSnip',
-  'saadparwaiz1/cmp_luasnip',
-  'jose-elias-alvarez/null-ls.nvim',
-  -- Productivity
-  'lewis6991/gitsigns.nvim',
-  'numToStr/Comment.nvim',
+  'nvim-lualine/lualine.nvim',
+  'lukas-reineke/indent-blankline.nvim',
   'folke/which-key.nvim',
-  'windwp/nvim-autopairs',
-  'kylechui/nvim-surround',
-  { 'iamcco/markdown-preview.nvim', build = 'cd app && npm install', ft = 'markdown' },
+  'rcarriga/nvim-notify',
+  'stevearc/dressing.nvim',
+  'folke/noice.nvim',
+  'petertriho/nvim-scrollbar',
+  'karb94/neoscroll.nvim',
+  -- Animations
+  'echasnovski/mini.animate',
   -- Color schemes
   { 'catppuccin/nvim', name = 'catppuccin' },
   'folke/tokyonight.nvim',
@@ -48,178 +44,85 @@ require('lazy').setup({
   'shaunsingh/nord.nvim',
   'navarasu/onedark.nvim',
   'EdenEast/nightfox.nvim',
-  -- IA
+  'Mofiqul/vscode.nvim',
+  'sainnhe/everforest',
+  'rebelot/kanagawa.nvim',
+  'rose-pine/neovim',
+  -- Productivity
+  'lewis6991/gitsigns.nvim',
+  'numToStr/Comment.nvim',
+  'windwp/nvim-autopairs',
+  'kylechui/nvim-surround',
+  'akinsho/toggleterm.nvim',
+  'nvim-telescope/telescope.nvim',
+  'nvim-lua/plenary.nvim',
+  'folke/trouble.nvim',
+  'mbbill/undotree',
+  'ThePrimeagen/harpoon',
+  -- LSP, Completion, Snippets
+  'neovim/nvim-lspconfig',
+  'williamboman/mason.nvim',
+  'williamboman/mason-lspconfig.nvim',
+  'hrsh7th/nvim-cmp',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-cmdline',
+  'L3MON4D3/LuaSnip',
+  'saadparwaiz1/cmp_luasnip',
+  'rafamadriz/friendly-snippets',
+  'jose-elias-alvarez/null-ls.nvim',
+  -- DAP (Debugging)
+  'mfussenegger/nvim-dap',
+  'rcarriga/nvim-dap-ui',
+  'theHamsta/nvim-dap-virtual-text',
+  -- Markdown/Docs
+  { 'iamcco/markdown-preview.nvim', build = 'cd app && npm install', ft = 'markdown' },
+  -- AI
   { 'Exafunction/codeium.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'hrsh7th/nvim-cmp' } },
 })
 
--- TREESITTER: Advanced syntax highlight
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "html", "css", "javascript", "lua", "python", "json", "bash" },
-  highlight = { enable = true },
-}
-
--- INDENT BLANKLINE v3 CONFIG
-require("ibl").setup {
-  indent = { char = "│" },
-  scope = { enabled = false },
-}
-
--- RAINBOW DELIMITERS: colored brackets/parentheses/braces
-local rainbow_delimiters = require 'rainbow-delimiters'
-vim.g.rainbow_delimiters = {
-  strategy = {
-    [''] = rainbow_delimiters.strategy['global'],
-    vim = rainbow_delimiters.strategy['local'],
-  },
-  query = {
-    [''] = 'rainbow-delimiters',
-    lua = 'rainbow-blocks',
-  },
-  highlight = {
-    'RainbowDelimiterRed', 'RainbowDelimiterYellow', 'RainbowDelimiterBlue',
-    'RainbowDelimiterOrange', 'RainbowDelimiterGreen', 'RainbowDelimiterViolet', 'RainbowDelimiterCyan',
-  },
-}
-
--- LUALINE
-require('lualine').setup {}
-
--- NVIM-TREE
-require('nvim-tree').setup {}
-
--- TOGGLETERM: Integrated terminal
-require('toggleterm').setup{
-  open_mapping = [[<c-\>]],
-  direction = 'float',
-}
-
--- TELESCOPE
-require('telescope').setup{}
-
--- === COLORSCHEME ROTATOR ===
-local colorschemes = {
-  'catppuccin', 'tokyonight', 'gruvbox', 'dracula', 'nord', 'onedark', 'nightfox', 'desert'
-}
-local cs_index = 1
-function _G.CycleColorscheme()
-  cs_index = cs_index % #colorschemes + 1
-  vim.cmd('colorscheme ' .. colorschemes[cs_index])
-  print('Colorscheme: ' .. colorschemes[cs_index])
-end
-vim.api.nvim_set_keymap('n', '<leader>cs', ':lua CycleColorscheme()<CR>', { noremap = true, silent = true })
-
--- === EASY KEYBINDS ===
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
-
--- File explorer
-map('n', '<leader>e', ':NvimTreeToggle<CR>', opts)
--- Find files
-map('n', '<leader>ff', ':Telescope find_files<CR>', opts)
--- Search text
-map('n', '<leader>fg', ':Telescope live_grep<CR>', opts)
--- Floating terminal
-map('n', '<leader>t', ':ToggleTerm direction=float<CR>', opts)
--- Web server
-map('n', '<leader>ws', ':TermExec cmd="python -m http.server 8000"<CR>', opts)
--- Web browser (w3m)
-map('n', '<leader>wb', ':TermExec cmd="w3m google.com"<CR>', opts)
--- Comment line/selection
-map('n', '<leader>/', ':lua require("Comment.api").toggle.linewise.current()<CR>', opts)
--- Surround (normal mode)
-map('n', '<leader>s', '<cmd>lua require("nvim-surround").normal_surround()<CR>', opts)
--- Which-key menu
-map('n', '<leader>?', ':WhichKey<CR>', opts)
-
--- === WHICH-KEY KEYBIND MENU ===
-local wk = require('which-key')
-wk.register({
-  ['<leader>'] = {
-    e = 'File explorer',
-    ff = 'Find files',
-    fg = 'Search text',
-    t = 'Floating terminal',
-    ws = 'Web server (python)',
-    wb = 'Web browser (w3m)',
-    cs = 'Change colorscheme',
-    ["/"] = 'Comment line',
-    s = 'Surround',
-    ['?'] = 'Show keybind menu',
-  }
-})
-
--- === ALT/SHIFT EASY KEYBINDS ===
--- File explorer
-map('n', '<A-e>', ':NvimTreeToggle<CR>', opts)
--- Find files
-map('n', '<A-f>', ':Telescope find_files<CR>', opts)
--- Search text
-map('n', '<A-g>', ':Telescope live_grep<CR>', opts)
--- Floating terminal
-map('n', '<A-t>', ':ToggleTerm direction=float<CR>', opts)
--- Change colorscheme
-map('n', '<A-s>', ':lua CycleColorscheme()<CR>', opts)
--- Comment line/selection
-map('n', '<A-/>', ':lua require("Comment.api").toggle.linewise.current()<CR>', opts)
--- Surround (normal mode)
-map('n', '<A-q>', '<cmd>lua require("nvim-surround").normal_surround()<CR>', opts)
--- Web server
-map('n', '<A-w>', ':TermExec cmd="python -m http.server 8000"<CR>', opts)
--- Web browser (w3m)
-map('n', '<A-b>', ':TermExec cmd="w3m google.com"<CR>', opts)
--- Which-key menu
-map('n', '<A-?>', ':WhichKey<CR>', opts)
--- Save file
-map('n', '<A-S>', ':w<CR>', opts)
--- Quit Neovim
-map('n', '<A-q>', ':q<CR>', opts)
--- New tab
-map('n', '<A-n>', ':tabnew<CR>', opts)
--- Next tab
-map('n', '<A-]>', ':tabnext<CR>', opts)
--- Previous tab
-map('n', '<A-[>', ':tabprevious<CR>', opts)
--- Split window horizontally
-map('n', '<A-h>', ':split<CR>', opts)
--- Split window vertically
-map('n', '<A-v>', ':vsplit<CR>', opts)
--- Move to left window
-map('n', '<A-Left>', '<C-w>h', opts)
--- Move to right window
-map('n', '<A-Right>', '<C-w>l', opts)
--- Move to upper window
-map('n', '<A-Up>', '<C-w>k', opts)
--- Move to lower window
-map('n', '<A-Down>', '<C-w>j', opts)
-
--- BASIC OPTIONS
+-- 4. Basic options for modern look
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.termguicolors = true
 vim.o.signcolumn = 'yes'
 vim.o.background = 'dark'
 vim.o.cursorline = true
+vim.o.updatetime = 200
+vim.o.splitright = true
+vim.o.splitbelow = true
+vim.o.scrolloff = 8
+vim.o.sidescrolloff = 8
 
--- Mejorar bordes de ventanas flotantes (opcional, para Gruvbox)
-vim.cmd [[
-  highlight FloatBorder guifg=#fabd2f guibg=#282828
-]]
+-- 5. Colorscheme (default: vscode)
+vim.cmd [[colorscheme vscode]]
 
--- Configuración de contraste suave para Gruvbox
-vim.g.gruvbox_contrast_dark = 'soft'
+-- 6. Treesitter
+require('nvim-treesitter.configs').setup {
+  ensure_installed = {
+    "bash", "c", "cpp", "css", "dockerfile", "go", "html", "java", "javascript", "json", "lua", "markdown", "php", "python", "ruby", "rust", "sql", "toml", "typescript", "vim", "yaml", "kotlin", "dart", "swift", "latex", "xml", "svelte", "vue"
+  },
+  highlight = { enable = true },
+  indent = { enable = true },
+}
 
--- LSP & AUTOCOMPLETION
+-- 7. LSP & Mason
 require('mason').setup{}
 require('mason-lspconfig').setup{
-  ensure_installed = { 'html', 'cssls', 'tsserver', 'pyright', 'lua_ls' },
+  ensure_installed = {
+    'bashls', 'clangd', 'cssls', 'dockerls', 'gopls', 'html', 'jdtls', 'tsserver', 'jsonls', 'lua_ls', 'marksman', 'phpactor', 'pyright', 'ruby_ls', 'rust_analyzer', 'sqlls', 'taplo', 'vimls', 'yamlls', 'kotlin_language_server', 'dartls', 'swift_mesonls', 'texlab', 'lemminx', 'volar', 'svelte',
+  },
 }
 local lspconfig = require('lspconfig')
-local servers = { 'html', 'cssls', 'tsserver', 'pyright', 'lua_ls' }
+local servers = {
+  'bashls', 'clangd', 'cssls', 'dockerls', 'gopls', 'html', 'jdtls', 'tsserver', 'jsonls', 'lua_ls', 'marksman', 'phpactor', 'pyright', 'ruby_ls', 'rust_analyzer', 'sqlls', 'taplo', 'vimls', 'yamlls', 'kotlin_language_server', 'dartls', 'swift_mesonls', 'texlab', 'lemminx', 'volar', 'svelte',
+}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {}
 end
 
--- Autocompletion
+-- 8. Autocompletion
 local cmp = require'cmp'
 local luasnip = require'luasnip'
 cmp.setup({
@@ -237,29 +140,64 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'buffer' },
+    { name = 'path' },
   }),
 })
 
--- null-ls for linters/formatters
-require('null-ls').setup{}
-
--- Gitsigns
+-- 9. UI Plugins setup (lualine, nvim-tree, etc)
+require('lualine').setup{}
+require('nvim-tree').setup{}
 require('gitsigns').setup{}
-
--- Comment.nvim
 require('Comment').setup{}
-
--- Which-key
 require('which-key').setup{}
-
--- Autopairs
 require('nvim-autopairs').setup{}
-
--- Surround
 require('nvim-surround').setup{}
+require('toggleterm').setup{}
+require('trouble').setup{}
+require('noice').setup{}
+require('notify').setup{}
+require('dressing').setup{}
+require('scrollbar').setup{}
+require('mini.animate').setup{}
+require('neoscroll').setup{}
 
--- Markdown preview (only for markdown)
+-- 10. Keybinds (Vim style, leader is Shift)
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+map('n', 'Sff', ':Telescope find_files<CR>', opts) -- Shift+ff: Find files
+map('n', 'Sfg', ':Telescope live_grep<CR>', opts)  -- Shift+fg: Grep
+map('n', 'Se', ':NvimTreeToggle<CR>', opts)        -- Shift+e: File explorer
+map('n', 'St', ':ToggleTerm<CR>', opts)            -- Shift+t: Terminal
+map('n', 'S/', ':lua require("Comment.api").toggle.linewise.current()<CR>', opts) -- Shift+/: Comment
+map('n', 'Sb', ':Telescope buffers<CR>', opts)     -- Shift+b: Buffers
+map('n', 'Sgs', ':Gitsigns stage_hunk<CR>', opts)  -- Shift+gs: Git stage
+map('n', 'Sgu', ':Gitsigns undo_stage_hunk<CR>', opts) -- Shift+gu: Git undo stage
+map('n', 'Sgd', ':Gitsigns diffthis<CR>', opts)    -- Shift+gd: Git diff
+map('n', 'Su', ':UndotreeToggle<CR>', opts)        -- Shift+u: Undo tree
+map('n', 'Sh', ':nohlsearch<CR>', opts)            -- Shift+h: Clear search
+map('n', 'Sq', ':q<CR>', opts)                     -- Shift+q: Quit
+map('n', 'Sw', ':w<CR>', opts)                     -- Shift+w: Save
+map('n', 'Sn', ':enew<CR>', opts)                  -- Shift+n: New file
+map('n', 'S[', ':bprevious<CR>', opts)             -- Shift+[: Prev buffer
+map('n', 'S]', ':bnext<CR>', opts)                 -- Shift+]: Next buffer
+map('n', 'Ss', ':lua require("nvim-surround").normal_surround()<CR>', opts) -- Shift+s: Surround
+map('n', 'S?', ':WhichKey<CR>', opts)              -- Shift+?: Which-key
+map('n', 'Scs', ':lua CycleColorscheme()<CR>', opts) -- Shift+cs: Cycle colorscheme
+
+-- 11. Colorscheme rotator
+local colorschemes = {
+  'vscode', 'catppuccin', 'tokyonight', 'gruvbox', 'dracula', 'nord', 'onedark', 'nightfox', 'everforest', 'kanagawa', 'rose-pine',
+}
+local cs_index = 1
+function _G.CycleColorscheme()
+  cs_index = cs_index % #colorschemes + 1
+  vim.cmd('colorscheme ' .. colorschemes[cs_index])
+  print('Colorscheme: ' .. colorschemes[cs_index])
+end
+
+-- 12. Markdown preview config
 vim.g.mkdp_auto_start = 0
 
--- Set default theme (change with <leader>cs)
-vim.cmd [[colorscheme gruvbox]] 
+-- 13. AI (Codeium)
+require("codeium").setup({}) 
