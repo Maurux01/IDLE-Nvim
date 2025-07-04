@@ -240,4 +240,4 @@ require('nvim-surround').setup{}
 vim.g.mkdp_auto_start = 0
 
 -- Set default theme (change with <leader>cs)
-vim.cmd [[colorscheme desert]] 
+vim.cmd [[colorscheme gruvbox]] 
