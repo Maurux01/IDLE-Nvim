@@ -48,7 +48,7 @@ Personal Neovim configuration to turn it into a super IDE for web development.
    ```
 2. Run the installer as administrator:
    ```powershell
-   install.bat
+   .\install.bat
    ```
    If you don't have Chocolatey, the script will give you instructions to install it.
 3. Open Neovim and run `:PackerSync` to install the plugins.
