@@ -1,188 +1,116 @@
-# IDLE-Nvim: The Ultimate Neovim + Tmux IDE Setup
+# IDLE-Nvim
 
-> **Turn your terminal into a beautiful, fast, AI-powered IDE on any Linux!**
+Personal Neovim configuration to turn it into a super IDE for web development.
+
+## Main Features
+- Advanced syntax highlighting (Treesitter)
+- Indent Rainbow (indentation colors)
+- Rainbow Delimiters (colored brackets/parentheses/braces)
+- Modern status bar (Lualine)
+- File explorer (Nvim-tree)
+- Powerful search (Telescope)
+- Icons (Web-devicons)
+- Integrated terminal (Toggleterm)
+- LSP and intelligent autocompletion
+- Automatic linters and formatters
+- Git integration (Gitsigns)
+- Quick comments
+- Surround and autopairs
+- Markdown preview
+- Multiple color themes with easy rotation
+- Command to launch web server (`<leader>ws`)
+- Command to open web browser in terminal (`<leader>wb` with w3m)
 
 ---
 
-## 🚀 Quick Start
+## Installation
 
 ### Linux (Debian, Ubuntu, Fedora, Arch, etc.)
 
-1. **Clone this repository:**
+1. Clone this repository:
    ```sh
-   git clone  https://github.com/Maurux01/IDLE-Nvim..git
-   cd idlenvim
+   git clone https://github.com/Maurux01/IDLE-Nvim.git
+   cd IDLE-Nvim
    ```
-2. **Run the installer:**
+2. Give permissions and run the installer:
    ```sh
    chmod +x install.sh
    ./install.sh
    ```
-   - The script will:
-     - Install all required dependencies (Neovim, tmux, git, node, python, etc.)
-     - Copy all config files to `~/.config/`
-     - Install Neovim and tmux plugins
-     - Offer to install a Nerd Font for icons
+3. Open Neovim and run `:PackerSync` to install the plugins.
 
 ### Windows
 
-1. **Clone this repository and enter the folder:**
+1. Clone this repository and enter the folder:
    ```powershell
-   git clone https://github.com/tuusuario/idlenvim.git
-   cd idlenvim
+   git clone https://github.com/Maurux01/IDLE-Nvim.git
+   cd IDLE-Nvim
    ```
-2. **Run the installer as administrator:**
+2. Run the installer as administrator:
    ```powershell
    install.bat
    ```
    If you don't have Chocolatey, the script will give you instructions to install it.
-3. **Open Neovim and run `:PackerSync` to install plugins:**
-   ```sh
-   nvim
-   :PackerSync
-   ```
+3. Open Neovim and run `:PackerSync` to install the plugins.
 
 ---
 
-## ✨ Features
+## Quick Usage
 
-- **All the best color schemes** (switch instantly with `<leader>cs`)
-- **AI-powered coding:**
-  - Copilot (always on, toggle with `<leader>cc`)
-  - Codeium (free alternative)
-  - ChatGPT.nvim (edit, refactor, explain, delete code with AI)
-- **Modern UI:** Animations, status bar, bufferline, file explorer, icons, notifications
-- **Easy keybinds:** which-key, legendary, hydra
-- **Productivity:** Telescope, Treesitter, LSP, autocompletion, commenting, TODOs, navigation, Harpoon, and more
-- **Beautiful tmux config:** Powerline bar, plugins, easy keybinds, dark theme
-- **Works on any Linux**
+### Navigation and files
+- **File explorer:** `<leader>e`
+- **Find files:** `<leader>ff`
+- **Search text:** `<leader>fg`
+- **Floating terminal:** `<leader>t`
 
----
+### Web development
+- **Launch web server:** `<leader>ws` (uses Python on port 8000)
+- **Web browser in terminal:** `<leader>wb` (opens w3m)
 
-## 🛠️ Prerequisites
+### Productivity
+- **Change color scheme:** `<leader>cs` (rotates between all themes)
+- **Comment line:** `<leader>/`
+- **Surround:** `<leader>s`
+- **View keybindings menu:** `<leader>?`
 
-The installer will try to install these for you, but you can check manually:
+### Autocompletion
+- **Activate autocompletion:** `<C-Space>`
+- **Confirm selection:** `<Enter>`
+- **Navigate suggestions:** `<C-b>` and `<C-f>`
 
-- Neovim 0.9+ (`nvim --version`)
-- tmux
-- git
-- nodejs & npm
-- python3 & pip
-- [Nerd Font](https://www.nerdfonts.com/) (for icons)
-- Recommended: `ripgrep`, `fd`, `fzf`
-
-> **Tip:** For best experience, use a terminal that supports true color and set a Nerd Font in your terminal preferences.
+> `<leader>` is usually `\` or `,` depending on your Neovim configuration.
 
 ---
 
-## 🧩 Manual Installation (Optional)
+## Included Themes
+- Catppuccin
+- Tokyo Night
+- Gruvbox
+- Dracula
+- Nord
+- One Dark
+- Nightfox
+- Desert (default)
 
-If you want to install manually or customize before setup:
-
-1. Copy configs:
-   ```sh
-   cp -r .config/nvim ~/.config/
-   cp -r .config/tmux ~/.config/
-   ```
-2. Install Neovim plugins:
-   ```sh
-   nvim
-   :Lazy sync
-   ```
-3. Install tmux plugins:
-   - Start tmux: `tmux`
-   - Press `Ctrl-a I` (capital i) to install plugins with tpm
+Use `<leader>cs` to switch between them.
 
 ---
 
-## 🖥️ Usage Guide
-
-### Color Scheme Switch
-- Press `<leader>cs` (space + c + s) to open the color scheme menu and pick your favorite.
-
-### Copilot (AI Autocomplete)
-- Copilot is always enabled by default.
-- Toggle Copilot with `<leader>cc` (space + c + c).
-
-### Codeium
-- Codeium is enabled if installed. No toggle by default.
-
-### ChatGPT.nvim (AI Edit/Refactor)
-- Select code in visual mode, press `<leader>ai`, and type your instruction ("Refactor", "Explain", "Delete", etc). The AI will edit the code for you.
-- **Requires your [OpenAI API key](https://platform.openai.com/account/api-keys)**. Set it in your environment or ChatGPT.nvim config.
-
-### Keybinds
-- `<leader>` is the space bar.
-- All keybinds are discoverable with which-key (just press `<leader>`).
-
-### Tmux
-- Prefix is `Ctrl-a` (not `Ctrl-b`).
-- Reload config: `Ctrl-a r`
-- Install plugins: `Ctrl-a I`
-- Powerline status bar, mouse support, and more.
-
-## ⌨️ Keybinds Quick Reference
-
-| Keybind         | Mode      | Description                                 |
-|-----------------|-----------|---------------------------------------------|
-| `<leader>`      | Normal    | Space bar (leader key for all mappings)     |
-| `<leader>cs`    | Normal    | Switch color scheme                         |
-| `<leader>cc`    | Normal    | Toggle Copilot (AI autocomplete)            |
-| `<leader>ai`    | Visual    | Edit/refactor code with ChatGPT.nvim        |
-| `<leader>ff`    | Normal    | Find files (Telescope)                      |
-| `<leader>fg`    | Normal    | Live grep (Telescope)                       |
-| `<leader>fb`    | Normal    | List open buffers (Telescope)               |
-| `<leader>fo`    | Normal    | Recent files (Telescope)                    |
-| `<leader>/'`    | Normal    | Fuzzy search in current buffer              |
-| `<leader>e`     | Normal    | Toggle file explorer (nvim-tree/neo-tree)   |
-| `<leader>tt`    | Normal    | Toggle Trouble (diagnostics)                |
-| `<leader>h`     | Normal    | Harpoon quick menu                         |
-| `<leader>m`     | Normal    | Toggle minimap (if enabled)                 |
-| `<leader>/'`    | Normal    | Fuzzy search in buffer                      |
-| `<leader>c`     | Normal    | Comment line/selection                      |
-| `<leader>u`     | Normal    | Toggle undo tree (if enabled)               |
-| `<Tab>`/`<S-Tab>` | Insert  | Next/prev completion (nvim-cmp)             |
-| `<C-Space>`     | Insert    | Trigger completion menu                     |
-| `gd`            | Normal    | Go to definition (LSP)                      |
-| `gr`            | Normal    | Go to references (LSP)                      |
-| `K`             | Normal    | Hover docs (LSP)                            |
-| `[d`/`]d`       | Normal    | Prev/next diagnostic (LSP)                  |
-| `\`             | Normal    | which-key popup (shows all mappings)        |
-| `Ctrl-a`        | tmux      | tmux prefix (instead of Ctrl-b)             |
-| `Ctrl-a r`      | tmux      | Reload tmux config                          |
-| `Ctrl-a I`      | tmux      | Install tmux plugins                        |
-| `Ctrl-a c`      | tmux      | New tmux window                             |
-| `Ctrl-a n/p`    | tmux      | Next/prev tmux window                       |
-| `Ctrl-a [`      | tmux      | Enter copy mode                             |
-| `Ctrl-a d`      | tmux      | Detach session                              |
-
-> For more, press `<leader>` in normal mode to see all available keybinds (which-key).
+## Additional Requirements
+- To browse web pages in terminal, make sure you have `w3m` installed (the installer does this for you).
+- For better visual experience, use a Nerd Font in your terminal.
 
 ---
 
-## ⚙️ Customization
-
-- All config is modular in `.config/nvim/lua/`.
-- Add/remove plugins in `plugins.lua`.
-- Change default color scheme in `colors.lua`.
-- Add your LSP servers in `lsp.lua`.
-- Tweak tmux in `.config/tmux/.tmux.conf`.
-
----
-
-## 🧑‍💻 Troubleshooting & Tips
-
-- If plugins don't load, run `:Lazy sync` in Neovim.
-- For tmux plugin issues, run `Ctrl-a I` again inside tmux.
-- For font/icon issues, make sure you use a Nerd Font in your terminal.
-- If a dependency fails to install, check your package manager or install manually.
-- For ChatGPT.nvim, set your OpenAI API key as an environment variable:
-  ```sh
-  export OPENAI_API_KEY=sk-...
-  ```
+## Customization
+You can edit the `init.lua` file to:
+- Add more plugins
+- Change keybindings
+- Modify LSP configurations
+- Customize themes
 
 ---
 
-## 🎉 Enjoy your supercharged Neovim + tmux IDE!
-
-> **Questions or suggestions? Open an issue or PR!**
+## Credits
+- Based on open source plugins from the Neovim community.
+- Configuration optimized for modern web development.
