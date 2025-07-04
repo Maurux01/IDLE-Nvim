@@ -10,7 +10,7 @@
 
 1. **Clone this repository:**
    ```sh
-   git clone https://github.com/tuusuario/idlenvim.git
+   git clone  https://github.com/Maurux01/IDLE-Nvim..git
    cd idlenvim
    ```
 2. **Run the installer:**
