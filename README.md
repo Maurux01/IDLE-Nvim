@@ -114,3 +114,42 @@ You can edit the `init.lua` file to:
 ## Credits
 - Based on open source plugins from the Neovim community.
 - Configuration optimized for modern web development.
+
+## Keybindings Table
+
+| Keybinding         | Action                        |
+|-------------------|-------------------------------|
+| `<Alt-e>`         | Toggle file explorer           |
+| `<Alt-f>`         | Find files (Telescope)         |
+| `<Alt-g>`         | Search text (Telescope)        |
+| `<Alt-t>`         | Floating terminal              |
+| `<Alt-s>`         | Change colorscheme             |
+| `<Alt-/>`         | Comment line/selection         |
+| `<Alt-q>`         | Surround (normal mode) / Quit  |
+| `<Alt-w>`         | Start web server (Python)      |
+| `<Alt-b>`         | Open web browser (w3m)         |
+| `<Alt-?>`         | Show which-key menu            |
+| `<Alt-S>`         | Save file                      |
+| `<Alt-n>`         | New tab                        |
+| `<Alt-]>`         | Next tab                       |
+| `<Alt-[>`         | Previous tab                   |
+| `<Alt-h>`         | Split window horizontally      |
+| `<Alt-v>`         | Split window vertically        |
+| `<Alt-Left>`      | Move to left window            |
+| `<Alt-Right>`     | Move to right window           |
+| `<Alt-Up>`        | Move to upper window           |
+| `<Alt-Down>`      | Move to lower window           |
+| `<leader>e`       | Toggle file explorer           |
+| `<leader>ff`      | Find files (Telescope)         |
+| `<leader>fg`      | Search text (Telescope)        |
+| `<leader>t`       | Floating terminal              |
+| `<leader>cs`      | Change colorscheme             |
+| `<leader>/`       | Comment line/selection         |
+| `<leader>s`       | Surround (normal mode)         |
+| `<leader>ws`      | Start web server (Python)      |
+| `<leader>wb`      | Open web browser (w3m)         |
+| `<leader>?`       | Show which-key menu            |
+
+> `<leader>` is the space bar (`Space`) in your config.
+
+You can use either the Alt-based shortcuts or the `<leader>` ones, whichever you find more comfortable!

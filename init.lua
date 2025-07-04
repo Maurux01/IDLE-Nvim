@@ -45,12 +45,10 @@ require'nvim-treesitter.configs'.setup {
   highlight = { enable = true },
 }
 
--- INDENT RAINBOW
-require("indent_blankline").setup {
-    char = "│",
-    show_trailing_blankline_indent = false,
-    show_current_context = true,
-    show_current_context_start = true,
+-- INDENT BLANKLINE v3 CONFIG
+require("ibl").setup {
+  indent = { char = "│" },
+  scope = { enabled = false },
 }
 
 -- RAINBOW DELIMITERS: colored brackets/parentheses/braces
@@ -137,18 +135,63 @@ wk.register({
   }
 })
 
+-- === ALT/SHIFT EASY KEYBINDS ===
+-- File explorer
+map('n', '<A-e>', ':NvimTreeToggle<CR>', opts)
+-- Find files
+map('n', '<A-f>', ':Telescope find_files<CR>', opts)
+-- Search text
+map('n', '<A-g>', ':Telescope live_grep<CR>', opts)
+-- Floating terminal
+map('n', '<A-t>', ':ToggleTerm direction=float<CR>', opts)
+-- Change colorscheme
+map('n', '<A-s>', ':lua CycleColorscheme()<CR>', opts)
+-- Comment line/selection
+map('n', '<A-/>', ':lua require("Comment.api").toggle.linewise.current()<CR>', opts)
+-- Surround (normal mode)
+map('n', '<A-q>', '<cmd>lua require("nvim-surround").normal_surround()<CR>', opts)
+-- Web server
+map('n', '<A-w>', ':TermExec cmd="python -m http.server 8000"<CR>', opts)
+-- Web browser (w3m)
+map('n', '<A-b>', ':TermExec cmd="w3m google.com"<CR>', opts)
+-- Which-key menu
+map('n', '<A-?>', ':WhichKey<CR>', opts)
+-- Save file
+map('n', '<A-S>', ':w<CR>', opts)
+-- Quit Neovim
+map('n', '<A-q>', ':q<CR>', opts)
+-- New tab
+map('n', '<A-n>', ':tabnew<CR>', opts)
+-- Next tab
+map('n', '<A-]>', ':tabnext<CR>', opts)
+-- Previous tab
+map('n', '<A-[>', ':tabprevious<CR>', opts)
+-- Split window horizontally
+map('n', '<A-h>', ':split<CR>', opts)
+-- Split window vertically
+map('n', '<A-v>', ':vsplit<CR>', opts)
+-- Move to left window
+map('n', '<A-Left>', '<C-w>h', opts)
+-- Move to right window
+map('n', '<A-Right>', '<C-w>l', opts)
+-- Move to upper window
+map('n', '<A-Up>', '<C-w>k', opts)
+-- Move to lower window
+map('n', '<A-Down>', '<C-w>j', opts)
+
 -- BASIC OPTIONS
 vim.o.number = true
-vim.o.relativenumber = true
+vim.o.relativenumber = false
 vim.o.termguicolors = true
+vim.o.signcolumn = 'no'
 
 -- LSP & AUTOCOMPLETION
 require('mason').setup{}
 require('mason-lspconfig').setup{
-  ensure_installed = { 'html', 'cssls', 'tsserver', 'pyright', 'lua_ls' },
+  ensure_installed = { 'html', 'cssls', 'ts_ls', 'pyright', 'lua_ls' },
 }
 local lspconfig = require('lspconfig')
-local servers = { 'html', 'cssls', 'tsserver', 'pyright', 'lua_ls' }
+local servers = { 'html', 'cssls', 'ts_ls', 'pyright', 'lua_ls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {}
 end
