@@ -153,3 +153,28 @@ You can edit the `init.lua` file to:
 > `<leader>` is the space bar (`Space`) in your config.
 
 You can use either the Alt-based shortcuts or the `<leader>` ones, whichever you find more comfortable!
+
+## Keybindings NvChad Style (Alt)
+
+| Keybinding   | Acción                        |
+|--------------|------------------------------|
+| <Alt-e>      | Toggle file explorer         |
+| <Alt-f>      | Find files (Telescope)       |
+| <Alt-g>      | Search text (Telescope)      |
+| <Alt-t>      | Floating terminal            |
+| <Alt-s>      | Change colorscheme           |
+| <Alt-/>      | Comment line/selection       |
+| <Alt-q>      | Surround (normal mode)       |
+| <Alt-w>      | Start web server (Python)    |
+| <Alt-b>      | Open web browser (w3m)       |
+| <Alt-?>      | Show which-key menu          |
+| <Alt-S>      | Save file                    |
+| <Alt-n>      | New tab                      |
+| <Alt-]>      | Next tab                     |
+| <Alt-[>      | Previous tab                 |
+| <Alt-h>      | Split window horizontally    |
+| <Alt-v>      | Split window vertically      |
+| <Alt-Left>   | Move to left window          |
+| <Alt-Right>  | Move to right window         |
+| <Alt-Up>     | Move to upper window         |
+| <Alt-Down>   | Move to lower window         |

@@ -236,6 +236,28 @@ map('n', '<leader>h', ':nohlsearch<CR>', opts)            -- Limpiar resaltado d
 map('n', '<leader>?', ':WhichKey<CR>', opts)              -- Mostrar menú de atajos (<leader> + ?)
 map('n', '<leader>cs', ':lua CycleColorscheme()<CR>', opts) -- Cambiar esquema de color
 
+-- === Keybinds estilo NvChad (Alt) ===
+map('n', '<A-e>', ':NvimTreeToggle<CR>', opts)
+map('n', '<A-f>', ':Telescope find_files<CR>', opts)
+map('n', '<A-g>', ':Telescope live_grep<CR>', opts)
+map('n', '<A-t>', ':ToggleTerm<CR>', opts)
+map('n', '<A-s>', ':lua CycleColorscheme()<CR>', opts)
+map('n', '<A-/>', ':lua require("Comment.api").toggle.linewise.current()<CR>', opts)
+map('n', '<A-q>', ':lua require("nvim-surround").normal_surround()<CR>', opts)
+map('n', '<A-w>', ':!python3 -m http.server 8000<CR>', opts)
+map('n', '<A-b>', ':!w3m google.com<CR>', opts)
+map('n', '<A-?>', ':WhichKey<CR>', opts)
+map('n', '<A-S>', ':w<CR>', opts)
+map('n', '<A-n>', ':tabnew<CR>', opts)
+map('n', '<A-]>', ':tabnext<CR>', opts)
+map('n', '<A-[>', ':tabprevious<CR>', opts)
+map('n', '<A-h>', ':split<CR>', opts)
+map('n', '<A-v>', ':vsplit<CR>', opts)
+map('n', '<A-Left>', '<C-w>h', opts)
+map('n', '<A-Right>', '<C-w>l', opts)
+map('n', '<A-Up>', '<C-w>k', opts)
+map('n', '<A-Down>', '<C-w>j', opts)
+
 -- 11. Colorscheme rotator
 local colorschemes = {
   'vscode', 'catppuccin', 'tokyonight', 'gruvbox', 'dracula', 'nord', 'onedark', 'nightfox', 'everforest', 'kanagawa', 'rose-pine',
