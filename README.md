@@ -8,11 +8,12 @@ Una configuración de Neovim moderna para desarrollo frontend y backend, diseña
 
 ## ✨ Características
 
--   ⚡ **Inicio Rápido**: Optimizada para la velocidad con el gestor de plugins `lazy.nvim`.
--   🎨 **UI Moderna**: Una interfaz bonita y funcional con dashboard, bufferline y statusline.
--   🧩 **LSP Integrado**: Soporte completo para LSP con `mason.nvim` para la instalación automática de servidores de lenguajes.
--   🤖 **Autocompletado Avanzado**: Autocompletado de última generación con `nvim-cmp`.
--   ✅ **Integración con Git**: Integración perfecta con Git gracias a `gitsigns.nvim`.
+-   ⚡ **Inicio Rápido**: Optimizada para la velocidad con `lazy.nvim`.
+-   🎨 **UI/UX de IDE**: Interfaz moderna y funcional con `which-key` para descubrir atajos, notificaciones mejoradas con `noice.nvim` y un dashboard de bienvenida.
+-   ✍️ **Formateo Automático**: Código limpio y consistente sin esfuerzo. Formateo al guardar con `none-ls`, compatible con `prettier`, `stylua` y más.
+-   🧩 **LSP Inteligente**: Soporte completo para LSP con `mason.nvim` para la instalación automática de servidores de lenguajes y autocompletado avanzado con `nvim-cmp`.
+-   🐛 **Depuración Integrada**: Depurador visual completo con `nvim-dap` y `nvim-dap-ui`. Añade breakpoints y ejecuta tu código paso a paso como en un IDE.
+-   🐙 **Git Avanzado**: Interfaz de Git súper potente con `lazygit.nvim` y `gitsigns.nvim` para una gestión de versiones fluida.
 -   🔍 **Búsqueda Potente**: Encuentra archivos y texto de forma interactiva con `telescope.nvim`.
 -   💻 **Multiplataforma**: Scripts de instalación sencillos para Windows y Linux/macOS.
 
@@ -30,6 +31,8 @@ Antes de instalar, asegúrate de tener todo lo siguiente:
     > **Importante**: Después de instalar la fuente, no olvides **configurarla en tu terminal** (Windows Terminal, Alacritty, iTerm2, etc.).
 4.  **(Recomendado)** Un compilador de C (como `gcc` o `Build Tools for Visual Studio`) para que `nvim-treesitter` compile los parsers de lenguajes más rápido.
 5.  **(Recomendado)** `ripgrep` para que la búsqueda de texto de Telescope (`live_grep`) sea súper rápida.
+6.  **(Opcional, para Git UI)** `lazygit` para usar la interfaz de Git avanzada.
+7.  **(Opcional, para Depuración)** Los "adaptadores" de depuración para tus lenguajes. Se pueden instalar fácilmente con `:Mason`.
 
 ### Paso 2: Clonar el Repositorio
 
@@ -80,20 +83,45 @@ La primera vez que lo abras, **`lazy.nvim` se encargará de instalar todos los p
 
 ## ⌨️ Atajos de Teclado Esenciales
 
-La tecla `<leader>` está configurada como la **barra espaciadora**.
+La tecla `<leader>` está configurada como la **barra espaciadora**. Gracias a `which-key.nvim`, después de presionar `<leader>`, aparecerá una ventana con los atajos disponibles.
 
+**General y UI**
 | Atajo              | Acción                                       |
 | ------------------ | -------------------------------------------- |
 | `<leader>e`        | Abrir/cerrar el explorador de archivos       |
-| `<leader>ff`       | Buscar archivos en el proyecto (Telescope)   |
-| `<leader>fg`       | Buscar texto en el proyecto (Telescope)      |
-| `<leader>bb`       | Ver los búferes abiertos (Telescope)         |
+| `<C-\>`            | Abrir/cerrar un terminal flotante            |
 | `gcc`              | Comentar/descomentar la línea actual         |
 | `gc` (modo visual) | Comentar/descomentar la selección            |
-| `<C-\>`            | Abrir/cerrar un terminal flotante            |
+
+**Telescope (Búsqueda)**
+| Atajo              | Acción                                       |
+| ------------------ | -------------------------------------------- |
+| `<leader>ff`       | Buscar archivos en el proyecto               |
+| `<leader>fg`       | Buscar texto en el proyecto                  |
+| `<leader>bb`       | Ver los búferes abiertos                     |
+| `<leader>fh`       | Buscar en la ayuda de Neovim                 |
+
+**LSP (Inteligencia de Código)**
+| Atajo              | Acción                                       |
+| ------------------ | -------------------------------------------- |
 | `gd`               | Ir a la definición de una variable/función   |
 | `K`                | Mostrar documentación (hover)                |
-| `<leader>ca`       | Ver acciones de código disponibles (LSP)     |
+| `<leader>ca`       | Ver acciones de código disponibles           |
+| `<leader>rn`       | Renombrar símbolo                            |
+
+**Git (con LazyGit)**
+| Atajo              | Acción                                       |
+| ------------------ | -------------------------------------------- |
+| `<leader>lg`       | Abrir la interfaz de LazyGit                 |
+
+**Depurador (DAP)**
+| Atajo              | Acción                                       |
+| ------------------ | -------------------------------------------- |
+| `<leader>db`       | Poner/quitar un punto de interrupción (breakpoint) |
+| `<leader>dc`       | Iniciar/continuar la ejecución               |
+| `<leader>do`       | Ejecutar el siguiente paso (step over)       |
+| `<leader>di`       | Entrar en la función (step into)             |
+| `<leader>du`       | Abrir/cerrar la interfaz del depurador       |
 
 ---
 

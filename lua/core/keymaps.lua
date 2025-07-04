@@ -45,6 +45,16 @@ map('n', '<leader>fe', ':NvimTreeFocus<CR>', opts)
 map('n', 'gcc', "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
 map('x', 'gc', "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
 
+-- DEBUGGER (DAP)
+map('n', '<leader>db', '<cmd>lua require("dap").toggle_breakpoint()<CR>', opts)
+map('n', '<leader>dc', '<cmd>lua require("dap").continue()<CR>', opts)
+map('n', '<leader>do', '<cmd>lua require("dap").step_over()<CR>', opts)
+map('n', '<leader>di', '<cmd>lua require("dap").step_into()<CR>', opts)
+map('n', '<leader>du', '<cmd>lua require("dapui").toggle()<CR>', opts)
+
+-- LAZYGIT
+map('n', '<leader>lg', ':LazyGit<CR>', opts)
+
 -- TERMINAL
 map('n', '<C-\\>', ':ToggleTerm<CR>', opts)
 -- Salir al modo normal en terminal: esto se hace en la config de toggleterm

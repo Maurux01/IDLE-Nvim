@@ -13,6 +13,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
+  -- UI & THEMES
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
   'nvim-tree/nvim-tree.lua',
   'nvim-tree/nvim-web-devicons',
@@ -33,7 +34,12 @@ require('lazy').setup({
   'rebelot/kanagawa.nvim',
   'rose-pine/neovim',
   'nyoom-engineering/oxocarbon.nvim',
+
+  -- GIT
   'lewis6991/gitsigns.nvim',
+  'kdheepak/lazygit.nvim',
+
+  -- UTILS
   'numToStr/Comment.nvim',
   'windwp/nvim-autopairs',
   'kylechui/nvim-surround',
@@ -42,9 +48,13 @@ require('lazy').setup({
   'nvim-lua/plenary.nvim',
   'folke/trouble.nvim',
   'mbbill/undotree',
+  { 'HiPhish/rainbow-delimiters.nvim' },
+
+  -- LSP, LINTING, FORMATTING & COMPLETION
   'neovim/nvim-lspconfig',
   'williamboman/mason.nvim',
   'williamboman/mason-lspconfig.nvim',
+  'nvimtools/none-ls.nvim',
   'hrsh7th/nvim-cmp',
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-buffer',
@@ -52,7 +62,10 @@ require('lazy').setup({
   'L3MON4D3/LuaSnip',
   'saadparwaiz1/cmp_luasnip',
   'rafamadriz/friendly-snippets',
-  { 'HiPhish/rainbow-delimiters.nvim' },
+
+  -- DEBUGGING
+  'mfussenegger/nvim-dap',
+  'rcarriga/nvim-dap-ui',
 })
 
-require('plugins') 
+require('plugins')

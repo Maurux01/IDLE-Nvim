@@ -1,5 +1,10 @@
 -- Configuración de Mason UI
 require('mason').setup {
+  ensure_installed = {
+    -- formatters
+    'prettier',
+    'stylua',
+  },
   ui = {
     border = 'rounded',
     icons = {
