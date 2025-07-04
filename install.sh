@@ -1,70 +1,40 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -e
 
-# Colors
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-NC='\033[0m'
-
-# Detect package manager
-if command -v apt &>/dev/null; then
-    PM="sudo apt-get install -y"
-elif command -v dnf &>/dev/null; then
-    PM="sudo dnf install -y"
-elif command -v pacman &>/dev/null; then
-    PM="sudo pacman -S --noconfirm"
+# Detectar distribución
+if [ -f /etc/debian_version ]; then
+    PKG="sudo apt-get install -y"
+    UPDATE="sudo apt-get update"
+elif [ -f /etc/fedora-release ]; then
+    PKG="sudo dnf install -y"
+    UPDATE="sudo dnf check-update"
+elif [ -f /etc/arch-release ]; then
+    PKG="sudo pacman -Syu --noconfirm"
+    UPDATE="sudo pacman -Sy"
 else
-    echo -e "${RED}No supported package manager found (apt, dnf, pacman). Install dependencies manually.${NC}"
+    echo "Distribución no soportada automáticamente. Instala manualmente: neovim python3 python3-pip w3m git curl"
     exit 1
 fi
 
-# Dependencies
-DEPS=(neovim tmux git nodejs npm python3 python3-pip ripgrep fd-find fzf)
+# Actualizar repositorios
+$UPDATE
 
-# Install missing dependencies
-for dep in "${DEPS[@]}"; do
-    if ! command -v ${dep%%-*} &>/dev/null; then
-        echo -e "${GREEN}Installing $dep...${NC}"
-        $PM $dep
-    else
-        echo -e "${GREEN}$dep already installed.${NC}"
-    fi
-done
+# Instalar dependencias
+$PKG neovim python3 python3-pip w3m git curl
 
-# fd-find is called 'fd' on some distros
-if ! command -v fd &>/dev/null && command -v fdfind &>/dev/null; then
-    ln -sf $(which fdfind) ~/.local/bin/fd
+# Instalar packer.nvim
+NVIM_DATA_DIR="$HOME/.local/share/nvim/site/pack/packer/start"
+if [ ! -d "$NVIM_DATA_DIR/packer.nvim" ]; then
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim "$NVIM_DATA_DIR/packer.nvim"
 fi
 
-# Copy configs
-mkdir -p ~/.config
-cp -r .config/nvim ~/.config/
-cp -r .config/tmux ~/.config/
+# Crear config si no existe
+mkdir -p "$HOME/.config/nvim"
 
-# Install Neovim plugins
-nvim --headless "+Lazy! sync" +qa
-
-# Install tmux plugins
-if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
-# Install tmux plugins (requires tmux running)
-echo -e "${GREEN}To finish tmux plugin install, open tmux and press Ctrl-a I${NC}"
-
-# Offer to install Nerd Font
-read -p "Do you want to install a Nerd Font for icons? (y/n): " nerd
-if [[ $nerd == "y" || $nerd == "Y" ]]; then
-    FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-    mkdir -p ~/.local/share/fonts
-    cd ~/.local/share/fonts
-    curl -LO $FONT_URL
-    unzip -o JetBrainsMono.zip
-    rm JetBrainsMono.zip
-    fc-cache -fv
-    echo -e "${GREEN}JetBrainsMono Nerd Font installed. Set it in your terminal preferences!${NC}"
-    cd -
-else
-    echo -e "${GREEN}Skipping Nerd Font install. For best experience, use a Nerd Font!${NC}"
+# Copiar init.lua si existe en el repo
+if [ -f "init.lua" ]; then
+    cp init.lua "$HOME/.config/nvim/init.lua"
+    echo "init.lua copiado a ~/.config/nvim/init.lua"
 fi
 
-echo -e "${GREEN}All done! Open Neovim and tmux and enjoy your new IDE!${NC}" 
+echo "Listo. Abre Neovim y ejecuta :PackerSync para instalar los plugins." 

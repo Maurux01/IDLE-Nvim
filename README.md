@@ -6,6 +6,8 @@
 
 ## 🚀 Quick Start
 
+### Linux (Debian, Ubuntu, Fedora, Arch, etc.)
+
 1. **Clone this repository:**
    ```sh
    git clone https://github.com/tuusuario/idlenvim.git
@@ -21,6 +23,24 @@
      - Copy all config files to `~/.config/`
      - Install Neovim and tmux plugins
      - Offer to install a Nerd Font for icons
+
+### Windows
+
+1. **Clone this repository and enter the folder:**
+   ```powershell
+   git clone https://github.com/tuusuario/idlenvim.git
+   cd idlenvim
+   ```
+2. **Run the installer as administrator:**
+   ```powershell
+   install.bat
+   ```
+   If you don't have Chocolatey, the script will give you instructions to install it.
+3. **Open Neovim and run `:PackerSync` to install plugins:**
+   ```sh
+   nvim
+   :PackerSync
+   ```
 
 ---
 
