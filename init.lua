@@ -1,44 +1,56 @@
 vim.g.mapleader = ' '
 
--- PACKER: Plugin manager
-vim.cmd [[packadd packer.nvim]]
+-- LAZY.NVIM: Plugin manager moderno y rápido
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable',
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use 'lukas-reineke/indent-blankline.nvim'
-  use 'nvim-lualine/lualine.nvim'
-  use 'nvim-tree/nvim-tree.lua'
-  use 'nvim-tree/nvim-web-devicons'
-  use { 'nvim-telescope/telescope.nvim', requires = { {'nvim-lua/plenary.nvim'} } }
-  use { 'akinsho/toggleterm.nvim', tag = '*' }
-  use { 'HiPhish/rainbow-delimiters.nvim' }
+require('lazy').setup({
+  -- Syntax & UI
+  { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+  'lukas-reineke/indent-blankline.nvim',
+  'nvim-lualine/lualine.nvim',
+  'nvim-tree/nvim-tree.lua',
+  'nvim-tree/nvim-web-devicons',
+  { 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim' } },
+  { 'akinsho/toggleterm.nvim', version = '*' },
+  'HiPhish/rainbow-delimiters.nvim',
   -- LSP & Autocompletion
-  use { 'neovim/nvim-lspconfig' }
-  use { 'williamboman/mason.nvim' }
-  use { 'williamboman/mason-lspconfig.nvim' }
-  use { 'hrsh7th/nvim-cmp' }
-  use { 'hrsh7th/cmp-nvim-lsp' }
-  use { 'L3MON4D3/LuaSnip' }
-  use { 'saadparwaiz1/cmp_luasnip' }
-  use { 'jose-elias-alvarez/null-ls.nvim' }
+  'neovim/nvim-lspconfig',
+  'williamboman/mason.nvim',
+  'williamboman/mason-lspconfig.nvim',
+  'hrsh7th/nvim-cmp',
+  'hrsh7th/cmp-nvim-lsp',
+  'L3MON4D3/LuaSnip',
+  'saadparwaiz1/cmp_luasnip',
+  'jose-elias-alvarez/null-ls.nvim',
   -- Productivity
-  use { 'lewis6991/gitsigns.nvim' }
-  use { 'numToStr/Comment.nvim' }
-  use { 'folke/which-key.nvim' }
-  use { 'windwp/nvim-autopairs' }
-  use { 'kylechui/nvim-surround' }
-  use { 'iamcco/markdown-preview.nvim', run = 'cd app && npm install', ft = { 'markdown' } }
+  'lewis6991/gitsigns.nvim',
+  'numToStr/Comment.nvim',
+  'folke/which-key.nvim',
+  'windwp/nvim-autopairs',
+  'kylechui/nvim-surround',
+  { 'iamcco/markdown-preview.nvim', build = 'cd app && npm install', ft = 'markdown' },
   -- Color schemes
-  use { 'catppuccin/nvim', as = 'catppuccin' }
-  use { 'folke/tokyonight.nvim' }
-  use { 'morhetz/gruvbox' }
-  use { 'dracula/vim', as = 'dracula' }
-  use { 'shaunsingh/nord.nvim' }
-  use { 'navarasu/onedark.nvim' }
-  use { 'EdenEast/nightfox.nvim' }
-  use { 'Exafunction/codeium.nvim', requires = { 'nvim-lua/plenary.nvim', 'hrsh7th/nvim-cmp' } }
-end)
+  { 'catppuccin/nvim', name = 'catppuccin' },
+  'folke/tokyonight.nvim',
+  'morhetz/gruvbox',
+  { 'dracula/vim', name = 'dracula' },
+  'shaunsingh/nord.nvim',
+  'navarasu/onedark.nvim',
+  'EdenEast/nightfox.nvim',
+  -- IA
+  { 'Exafunction/codeium.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'hrsh7th/nvim-cmp' } },
+})
 
 -- TREESITTER: Advanced syntax highlight
 require'nvim-treesitter.configs'.setup {
@@ -182,9 +194,19 @@ map('n', '<A-Down>', '<C-w>j', opts)
 
 -- BASIC OPTIONS
 vim.o.number = true
-vim.o.relativenumber = false
+vim.o.relativenumber = true
 vim.o.termguicolors = true
-vim.o.signcolumn = 'no'
+vim.o.signcolumn = 'yes'
+vim.o.background = 'dark'
+vim.o.cursorline = true
+
+-- Mejorar bordes de ventanas flotantes (opcional, para Gruvbox)
+vim.cmd [[
+  highlight FloatBorder guifg=#fabd2f guibg=#282828
+]]
+
+-- Configuración de contraste suave para Gruvbox
+vim.g.gruvbox_contrast_dark = 'soft'
 
 -- LSP & AUTOCOMPLETION
 require('mason').setup{}
