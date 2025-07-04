@@ -3,8 +3,8 @@
 -- =============================
 -- Modern IDE-like config with lazy.nvim, LSP, autocompletion, VSCode-like UI, animations, and all major languages
 
--- 1. Set <leader> to Shift ("S")
-vim.g.mapleader = "S"
+-- 1. Set <leader> to '/'
+vim.g.mapleader = "/"
 
 -- 2. Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -162,28 +162,28 @@ require('scrollbar').setup{}
 require('mini.animate').setup{}
 require('neoscroll').setup{}
 
--- 10. Keybinds (Vim style, leader is Shift)
+-- 10. Keybinds (Vim style, leader is /)
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
-map('n', 'Sff', ':Telescope find_files<CR>', opts) -- Shift+ff: Find files
-map('n', 'Sfg', ':Telescope live_grep<CR>', opts)  -- Shift+fg: Grep
-map('n', 'Se', ':NvimTreeToggle<CR>', opts)        -- Shift+e: File explorer
-map('n', 'St', ':ToggleTerm<CR>', opts)            -- Shift+t: Terminal
-map('n', 'S/', ':lua require("Comment.api").toggle.linewise.current()<CR>', opts) -- Shift+/: Comment
-map('n', 'Sb', ':Telescope buffers<CR>', opts)     -- Shift+b: Buffers
-map('n', 'Sgs', ':Gitsigns stage_hunk<CR>', opts)  -- Shift+gs: Git stage
-map('n', 'Sgu', ':Gitsigns undo_stage_hunk<CR>', opts) -- Shift+gu: Git undo stage
-map('n', 'Sgd', ':Gitsigns diffthis<CR>', opts)    -- Shift+gd: Git diff
-map('n', 'Su', ':UndotreeToggle<CR>', opts)        -- Shift+u: Undo tree
-map('n', 'Sh', ':nohlsearch<CR>', opts)            -- Shift+h: Clear search
-map('n', 'Sq', ':q<CR>', opts)                     -- Shift+q: Quit
-map('n', 'Sw', ':w<CR>', opts)                     -- Shift+w: Save
-map('n', 'Sn', ':enew<CR>', opts)                  -- Shift+n: New file
-map('n', 'S[', ':bprevious<CR>', opts)             -- Shift+[: Prev buffer
-map('n', 'S]', ':bnext<CR>', opts)                 -- Shift+]: Next buffer
-map('n', 'Ss', ':lua require("nvim-surround").normal_surround()<CR>', opts) -- Shift+s: Surround
-map('n', 'S?', ':WhichKey<CR>', opts)              -- Shift+?: Which-key
-map('n', 'Scs', ':lua CycleColorscheme()<CR>', opts) -- Shift+cs: Cycle colorscheme
+map('n', '<leader>ff', ':Telescope find_files<CR>', opts) -- /ff: Find files
+map('n', '<leader>fg', ':Telescope live_grep<CR>', opts)  -- /fg: Grep
+map('n', '<leader>e', ':NvimTreeToggle<CR>', opts)        -- /e: File explorer
+map('n', '<leader>t', ':ToggleTerm<CR>', opts)            -- /t: Terminal
+map('n', '<leader>/', ':lua require("Comment.api").toggle.linewise.current()<CR>', opts) -- //: Comment
+map('n', '<leader>b', ':Telescope buffers<CR>', opts)     -- /b: Buffers
+map('n', '<leader>gs', ':Gitsigns stage_hunk<CR>', opts)  -- /gs: Git stage
+map('n', '<leader>gu', ':Gitsigns undo_stage_hunk<CR>', opts) -- /gu: Git undo stage
+map('n', '<leader>gd', ':Gitsigns diffthis<CR>', opts)    -- /gd: Git diff
+map('n', '<leader>u', ':UndotreeToggle<CR>', opts)        -- /u: Undo tree
+map('n', '<leader>h', ':nohlsearch<CR>', opts)            -- /h: Clear search
+map('n', '<leader>q', ':q<CR>', opts)                     -- /q: Quit
+map('n', '<leader>w', ':w<CR>', opts)                     -- /w: Save
+map('n', '<leader>n', ':enew<CR>', opts)                  -- /n: New file
+map('n', '<leader>[', ':bprevious<CR>', opts)             -- /[: Prev buffer
+map('n', '<leader>]', ':bnext<CR>', opts)                 -- /]: Next buffer
+map('n', '<leader>s', ':lua require("nvim-surround").normal_surround()<CR>', opts) -- /s: Surround
+map('n', '<leader>?', ':WhichKey<CR>', opts)              -- /?: Which-key
+map('n', '<leader>cs', ':lua CycleColorscheme()<CR>', opts) -- /cs: Cycle colorscheme
 
 -- 11. Colorscheme rotator
 local colorschemes = {
