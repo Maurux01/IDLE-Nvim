@@ -71,7 +71,7 @@ require('lazy').setup({
   'L3MON4D3/LuaSnip',
   'saadparwaiz1/cmp_luasnip',
   'rafamadriz/friendly-snippets',
-  'jose-elias-alvarez/null-ls.nvim',
+  'nvimtools/none-ls.nvim',
   -- DAP (Debugging)
   'mfussenegger/nvim-dap',
   'rcarriga/nvim-dap-ui',
@@ -257,4 +257,20 @@ end
 vim.g.mkdp_auto_start = 0
 
 -- 13. AI (Codeium)
-require("codeium").setup({}) 
+require("codeium").setup({})
+
+-- Mostrar ASCII art de bienvenida solo con el texto N-VIM
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    local ascii = {
+      " _   _      _    ___ ___ __  __ ",
+      "| \\ | |    | |  |_ _|_ _|  \\/  |",
+      "|  \\| | ___| |_  | | | || |\\/| |",
+      "| . ` |/ _ \\ __| | | | || |  | |",
+      "| |\\  |  __/ |_ |___|___|_|  |_||",
+      "|_| \\_|\\___|\\__|                   ",
+    }
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, ascii)
+    vim.api.nvim_command('normal! G')
+  end
+}) 
